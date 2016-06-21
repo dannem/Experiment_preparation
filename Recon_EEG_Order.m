@@ -5,7 +5,7 @@ function [savVec,outVec]=Recon_EEG_Order(numberOfVersions,numberOfBlocks,numberO
 % numberOfSessions=2;
 
 %% preparing vector for good trials in one block
-a=[1:118]';
+a=[1:120]';
 good=[a;a];
 
 %% preparing vector for catch trials in one session
@@ -34,9 +34,9 @@ for i=1:numberOfVersions;
                 catVec=catchTrials((k-1)*(numOfCatch/numberOfBlocks)+1:k*(numOfCatch/numberOfBlocks));
                 for u=1:numOfCatch/numberOfBlocks
                     if catVec(u)<60
-                        numNow=catVec(u)+59;
+                        numNow=catVec(u)+60;
                     else
-                        numNow=catVec(u)-59;
+                        numNow=catVec(u)-60;
                     end
                     z=find(good1==numNow);
                     d=diff(z);
@@ -62,10 +62,10 @@ for i=1:numberOfVersions;
             end
             good3=zeros(size(good1));
             for q=1:size(good1)
-                if good1(q)<60
+                if good1(q)<61
                     good3(q)=good1(q);
                 else
-                    good3(q)=good1(q)+41;
+                    good3(q)=good1(q)+40;
                 end
             end
             outVec(i,j,(k-1)*numOfStimPerBlock+1:k*numOfStimPerBlock,1)=good1;
@@ -83,8 +83,8 @@ end
     function stat=checkRepet(vect,doCorrection)
         if doCorrection==1
             for b=1:length(vect)
-                if vect(b)>59
-                    vect(b)=vect(b)-59;
+                if vect(b)>60
+                    vect(b)=vect(b)-60;
                 else
                     %                 vect(b)=vect(b)+60;
                 end
@@ -96,8 +96,8 @@ end
             end
         elseif doCorrection==2
             for b=1:length(vect)
-                if vect(b)>59
-                    vect(b)=vect(b)-59;
+                if vect(b)>60
+                    vect(b)=vect(b)-60;
                 else
                     %                 vect(b)=vect(b)+60;
                 end
